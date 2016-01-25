@@ -392,7 +392,7 @@ public fun <K, V, M : MutableMap<in K, in V>> Sequence<Pair<K, V>>.toMap(destina
 /**
  * Converts this [Map] to a [LinkedHashMap], maintaining the insertion order of elements added to that map afterwards.
  */
-@Deprecated("It may be to late to covert map to linked map, if you care about the order use the ordered map from the beginning.", ReplaceWith("LinkedHashMap(this)", "java.util.LinkedHashMap"))
+@Deprecated("It may be too late to convert map this map to linked map, if you care about the order use the ordered map from the beginning.", ReplaceWith("LinkedHashMap(this)", "java.util.LinkedHashMap"))
 public fun <K, V> Map<K, V>.toLinkedMap(): MutableMap<K, V> = LinkedHashMap(this)
 
 /**
