@@ -162,13 +162,12 @@ private fun File.toRelativeStringOrNull(base: File): String? {
  * Copies this file to the given output [target], returning the number of bytes copied.
  *
  * If some directories on a way to the [target] are missing, then they will be created.
- * If the [target] file already exists, then this function will fail unless [overwrite] argument is set to `true`.
+ * If the [target] file already exists, this function will fail unless [overwrite] argument is set to `true`.
  *
- * When [overwrite] is `true`:
- *     - If this file is a file, and [target] is a directory, that directory is replaced only if it is empty.
- *     - If this file is directory and [target] is a file, the file is replaced.
+ * When [overwrite] is `true` and [target] is a directory, it is replaced only if it is empty.
  *
- * If this file is a directory, an empty [target] directory is created, unless it is already exists.
+ * If this file is a directory, it is copied without its content, i.e. an empty [target] directory is created.
+ * If you want to copy directory including its contents, use [copyRecursively].
  *
  * @param overwrite `true` if destination overwrite is allowed.
  * @param bufferSize the buffer size to use when copying.
