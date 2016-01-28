@@ -1,0 +1,1 @@
+inline fun (() -> String).test(): (() -> String) = { invoke() + this.invoke() + this() }
