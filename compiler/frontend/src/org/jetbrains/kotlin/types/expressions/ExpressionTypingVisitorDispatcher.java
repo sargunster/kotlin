@@ -18,6 +18,7 @@ package org.jetbrains.kotlin.types.expressions;
 
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProcessCanceledException;
+import com.intellij.psi.PsiFile;
 import kotlin.jvm.functions.Function0;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -25,6 +26,7 @@ import org.jetbrains.kotlin.diagnostics.DiagnosticUtils;
 import org.jetbrains.kotlin.diagnostics.Errors;
 import org.jetbrains.kotlin.incremental.components.LookupTracker;
 import org.jetbrains.kotlin.psi.*;
+import org.jetbrains.kotlin.psi.codeFragmentUtil.CodeFragmentUtilKt;
 import org.jetbrains.kotlin.resolve.*;
 import org.jetbrains.kotlin.resolve.bindingContextUtil.BindingContextUtilsKt;
 import org.jetbrains.kotlin.resolve.calls.context.CallPosition;
@@ -144,8 +146,13 @@ public abstract class ExpressionTypingVisitorDispatcher extends KtVisitor<Kotlin
     @Override
     @NotNull
     public final KotlinTypeInfo getTypeInfo(@NotNull KtExpression expression, ExpressionTypingContext context, boolean isStatement) {
-        if (!isStatement) return getTypeInfo(expression, context);
-        return getTypeInfo(expression, context, getStatementVisitor(context));
+        ExpressionTypingContext newContext = context;
+        PsiFile file = expression.getContainingFile();
+        if (file instanceof KtFile && CodeFragmentUtilKt.getSuppressDiagnosticsInDebugMode((KtFile) file)) {
+            newContext = ExpressionTypingContext.newContext(context, true);
+        }
+        if (!isStatement) return getTypeInfo(expression, newContext);
+        return getTypeInfo(expression, newContext, getStatementVisitor(newContext));
     }
     
     protected ExpressionTypingVisitorForStatements createStatementVisitor(ExpressionTypingContext context) {

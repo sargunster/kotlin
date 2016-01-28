@@ -303,6 +303,10 @@ class NewResolveOldInference(
             return variableReceiver to newContext
         }
 
+        override fun isDebuggerContext(): Boolean {
+            return basicCallContext.isDebuggerContext
+        }
+
     }
 
 }

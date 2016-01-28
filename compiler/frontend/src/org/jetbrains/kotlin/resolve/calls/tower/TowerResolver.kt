@@ -45,6 +45,8 @@ interface TowerContext<C> {
     // foo() -> ReceiverValue(foo), context for invoke
     // null means that there is no invoke on variable
     fun contextForInvoke(variable: C, useExplicitReceiver: Boolean): Pair<ReceiverValue, TowerContext<C>>?
+
+    fun isDebuggerContext(): Boolean
 }
 
 internal sealed class TowerData {
