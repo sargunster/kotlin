@@ -619,27 +619,31 @@ public fun String.replaceBeforeLast(delimiter: String, replacement: String, miss
  * The [replacement] can consist of any combination of literal text and $-substitutions. To treat the replacement string
  * literally escape it with the [kotlin.text.Regex.Companion.escapeReplacement] method.
  */
-public fun CharSequence.replace(regex: Regex, replacement: String): String = regex.replace(this, replacement)
+@kotlin.internal.InlineOnly
+public inline fun CharSequence.replace(regex: Regex, replacement: String): String = regex.replace(this, replacement)
 
 /**
  * Returns a new string obtained by replacing each substring of this char sequence that matches the given regular expression
  * with the result of the given function [transform] that takes [MatchResult] and returns a string to be used as a
  * replacement for that match.
  */
-public fun CharSequence.replace(regex: Regex, transform: (MatchResult) -> CharSequence): String = regex.replace(this, transform)
+@kotlin.internal.InlineOnly
+public inline fun CharSequence.replace(regex: Regex, transform: (MatchResult) -> CharSequence): String = regex.replace(this, transform)
 
 /**
  * Replaces the first occurrence of the given regular expression [regex] in this char sequence with specified [replacement] expression.
  *
  * @param replacement A replacement expression that can include substitutions. See [Regex.replaceFirst] for details.
  */
-public fun CharSequence.replaceFirst(regex: Regex, replacement: String): String = regex.replaceFirst(this, replacement)
+@kotlin.internal.InlineOnly
+public inline fun CharSequence.replaceFirst(regex: Regex, replacement: String): String = regex.replaceFirst(this, replacement)
 
 
 /**
  * Returns `true` if this char sequence matches the given regular expression.
  */
-public fun CharSequence.matches(regex: Regex): Boolean = regex.matches(this)
+@kotlin.internal.InlineOnly
+public inline fun CharSequence.matches(regex: Regex): Boolean = regex.matches(this)
 
 /**
  * Implementation of [regionMatches] for CharSequences.
@@ -981,7 +985,8 @@ public operator fun CharSequence.contains(char: Char, ignoreCase: Boolean = fals
 /**
  * Returns `true` if this char sequence contains at least one match of the specified regular expression [regex].
  */
-public operator fun CharSequence.contains(regex: Regex): Boolean = regex.containsMatchIn(this)
+@kotlin.internal.InlineOnly
+public inline operator fun CharSequence.contains(regex: Regex): Boolean = regex.containsMatchIn(this)
 
 
 // rangesDelimitedBy
