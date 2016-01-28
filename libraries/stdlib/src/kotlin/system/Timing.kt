@@ -5,6 +5,7 @@ package kotlin.system
 /**
  * Executes the given block and returns elapsed time in milliseconds.
  */
+@kotlin.internal.InlineOnly
 public inline fun measureTimeMillis(block: () -> Unit) : Long {
     val start = System.currentTimeMillis()
     block()
@@ -14,6 +15,7 @@ public inline fun measureTimeMillis(block: () -> Unit) : Long {
 /**
  * Executes the given block and returns elapsed time in nanoseconds.
  */
+@kotlin.internal.InlineOnly
 public inline fun measureNanoTime(block: () -> Unit) : Long {
     val start = System.nanoTime()
     block()

@@ -16,6 +16,7 @@ public fun require(value: Boolean): Unit = require(value) { "Failed requirement"
  *
  * @sample test.collections.PreconditionsTest.failingRequireWithLazyMessage
  */
+@kotlin.internal.InlineOnly
 public inline fun require(value: Boolean, lazyMessage: () -> Any): Unit {
     if (!value) {
         val message = lazyMessage()
@@ -34,6 +35,7 @@ public fun <T:Any> requireNotNull(value: T?): T = requireNotNull(value) { "Requi
  *
  * @sample test.collections.PreconditionsTest.requireNotNullWithLazyMessage
  */
+@kotlin.internal.InlineOnly
 public inline fun <T:Any> requireNotNull(value: T?, lazyMessage: () -> Any): T {
     if (value == null) {
         val message = lazyMessage()
@@ -53,6 +55,7 @@ public fun check(value: Boolean): Unit = check(value) { "Check failed" }
  *
  * @sample test.collections.PreconditionsTest.failingCheckWithLazyMessage
  */
+@kotlin.internal.InlineOnly
 public inline fun check(value: Boolean, lazyMessage: () -> Any): Unit {
     if (!value) {
         val message = lazyMessage()
@@ -70,6 +73,7 @@ public fun <T:Any> checkNotNull(value: T?): T = checkNotNull(value) { "Required 
  * Throws an [IllegalStateException] with the result of calling [lazyMessage]  if the [value] is null. Otherwise
  * returns the not null value.
  */
+@kotlin.internal.InlineOnly
 public inline fun <T:Any> checkNotNull(value: T?, lazyMessage: () -> Any): T {
     if (value == null) {
         val message = lazyMessage()

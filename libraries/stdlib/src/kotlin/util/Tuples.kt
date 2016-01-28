@@ -35,12 +35,14 @@ public data class Pair<out A, out B>(
  * This can be useful for creating [Map] literals with less noise, for example:
  * @sample test.collections.MapTest.createUsingTo
  */
-public infix fun <A, B> A.to(that: B): Pair<A, B> = Pair(this, that)
+@kotlin.internal.InlineOnly
+public inline infix fun <A, B> A.to(that: B): Pair<A, B> = Pair(this, that)
 
 /**
  * Converts this pair into a list.
  */
-public fun <T> Pair<T, T>.toList(): List<T> = listOf(first, second)
+@kotlin.internal.InlineOnly
+public inline fun <T> Pair<T, T>.toList(): List<T> = listOf(first, second)
 
 /**
  * Represents a triad of values
@@ -72,4 +74,5 @@ public data class Triple<out A, out B, out C>(
 /**
  * Converts this triple into a list.
  */
-public fun <T> Triple<T, T, T>.toList(): List<T> = listOf(first, second, third)
+@kotlin.internal.InlineOnly
+public inline fun <T> Triple<T, T, T>.toList(): List<T> = listOf(first, second, third)
