@@ -46,8 +46,9 @@ class JvmFieldApplicabilityChecker : DeclarationChecker {
     }
 
     override fun check(
-            declaration: KtDeclaration,
+            declaration: KtDeclaration?,
             descriptor: DeclarationDescriptor,
+            reportOn: KtDeclaration,
             diagnosticHolder: DiagnosticSink,
             bindingContext: BindingContext
     ) {
@@ -65,7 +66,7 @@ class JvmFieldApplicabilityChecker : DeclarationChecker {
             descriptor.isLateInit -> LATEINIT
             descriptor.isConst -> CONST
             descriptor.isInsideCompanionObjectOfInterface() -> INSIDE_COMPANION_OF_INTERFACE
-            DescriptorUtils.isTopLevelDeclaration(descriptor) && declaration.isInsideJvmMultifileClassFile() ->
+            DescriptorUtils.isTopLevelDeclaration(descriptor) && (declaration ?: reportOn).isInsideJvmMultifileClassFile() ->
                 TOP_LEVEL_PROPERTY_OF_MULTIFILE_FACADE
             else -> return
         }

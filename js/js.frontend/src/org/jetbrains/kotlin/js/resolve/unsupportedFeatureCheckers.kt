@@ -18,11 +18,8 @@ package org.jetbrains.kotlin.js.resolve
 
 import org.jetbrains.kotlin.descriptors.ClassDescriptor
 import org.jetbrains.kotlin.descriptors.DeclarationDescriptor
-import org.jetbrains.kotlin.descriptors.DeclarationDescriptorWithVisibility
-import org.jetbrains.kotlin.descriptors.Visibilities
 import org.jetbrains.kotlin.diagnostics.DiagnosticSink
 import org.jetbrains.kotlin.diagnostics.rendering.renderKind
-import org.jetbrains.kotlin.diagnostics.rendering.renderKindWithName
 import org.jetbrains.kotlin.js.resolve.diagnostics.ErrorsJs
 import org.jetbrains.kotlin.js.translate.utils.AnnotationsUtils
 import org.jetbrains.kotlin.psi.*
@@ -32,8 +29,9 @@ import org.jetbrains.kotlin.resolve.DescriptorUtils
 
 class ClassDeclarationChecker : DeclarationChecker {
     override fun check(
-            declaration: KtDeclaration,
+            declaration: KtDeclaration?,
             descriptor: DeclarationDescriptor,
+            reportOn: KtDeclaration,
             diagnosticHolder: DiagnosticSink,
             bindingContext: BindingContext
     ) {

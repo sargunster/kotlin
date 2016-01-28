@@ -180,7 +180,7 @@ public class ModifiersChecker {
 
         private void checkModifierListCommon(@NotNull KtDeclaration modifierListOwner, @NotNull DeclarationDescriptor descriptor) {
             AnnotationUseSiteTargetChecker.INSTANCE.check(modifierListOwner, descriptor, trace);
-            runDeclarationCheckers(modifierListOwner, descriptor);
+            runDeclarationCheckers(modifierListOwner, descriptor, modifierListOwner);
             annotationChecker.check(modifierListOwner, trace, descriptor);
             ModifierCheckerCore.INSTANCE.check(modifierListOwner, trace, descriptor);
         }
@@ -228,9 +228,13 @@ public class ModifiersChecker {
         }
 
 
-        private void runDeclarationCheckers(@NotNull KtDeclaration declaration, @NotNull DeclarationDescriptor descriptor) {
+        public void runDeclarationCheckers(
+                @Nullable KtDeclaration declaration,
+                @NotNull DeclarationDescriptor descriptor,
+                @NotNull KtDeclaration reportOn
+        ) {
             for (DeclarationChecker checker : declarationCheckers) {
-                checker.check(declaration, descriptor, trace, trace.getBindingContext());
+                checker.check(declaration, descriptor, reportOn, trace, trace.getBindingContext());
             }
         }
 

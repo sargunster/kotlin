@@ -28,8 +28,12 @@ import org.jetbrains.kotlin.resolve.jvm.diagnostics.ErrorsJvm
 
 class JvmSyntheticApplicabilityChecker : DeclarationChecker {
 
-    override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor,
-                       diagnosticHolder: DiagnosticSink, bindingContext: BindingContext
+    override fun check(
+            declaration: KtDeclaration?,
+            descriptor: DeclarationDescriptor,
+            reportOn: KtDeclaration,
+            diagnosticHolder: DiagnosticSink,
+            bindingContext: BindingContext
     ) {
         val annotation = descriptor.findJvmSyntheticAnnotation() ?: return
         if (declaration is KtProperty && declaration.hasDelegate()) {
